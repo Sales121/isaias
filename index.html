@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Layout de Imagens</title>
+    <style>
+        body {
+          background-color: #1b1b1b;
+          margin: 0;
+          padding: 0;
+        }
+  
+        .imagens {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin: 0;
+          padding: 0;
+          height: 100vh;
+          width: 100%;
+          white-space: nowrap;
+        }
+  
+        /* Estilizar as imagens */
+        .imagem {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: none;
+          margin-top: -20%;
+          text-align: center;
+        }
+  
+        .imagem img {
+          display: inline-block;
+          vertical-align: middle;
+        }
+  
+        .imagem-principal {
+          width: 100%;
+          height: 100%;
+          margin: 0 auto;
+        }
+  
+        .imagem-adicional,
+        .imagem-geral {
+          width: 100%;
+          height: auto;
+          max-height: 33.33vh;
+          margin: 0 auto;
+        }
+  
+        /* Mostrar a imagem ativa */
+        .imagem.ativo {
+          display: block;
+        }
+  
+        /* Estilos para telas menores */
+        @media screen and (max-width: 1024px) {
+          .imagem {
+            width: 100%;
+            height: auto;
+          }
+          .imagem-principal {
+            height: auto;
+          }
+          .imagem-adicional,
+          .imagem-geral {
+            height: auto;
+          }
+        }
+      </style>
+  </head>
+
+  <body>
+    <div class="imagens">
+      <!-- Imagem principal -->
+      <div class="imagem-principal">
+        <img class="imagem ativo" src="imagens/0373ba7d-02fd-4c86-9407-28ba66b81665.png" alt="Imagem principal">
+      </div>
+      <div class="imagem-principal">
+        <img class="imagem " src="imagens/ae542677-13b8-48dd-a04a-a68f89e387df.png" alt="Imagem principal">
+      </div>
+      <div class="imagem-principal">
+        <img class="imagem " src="imagens/0810269d-8194-413a-8a37-dab19997a0a8.png" alt="Imagem principal">
+      </div>
+      <div class="imagem-principal">
+        <img class="imagem " src="imagens/0373ba7d-02fd-4c86-9407-28ba66b81666.png" alt="Imagem principal">
+      </div>
+    </div>
+
+    <script>
+
+window.addEventListener('load', function() {
+    const imagens = document.querySelectorAll('.imagem');
+let imagemAtual = 0; // índice da imagem atual
+
+// função para avançar para a próxima imagem
+const avancarImagem = () => {
+  imagemAtual++;
+  if (imagemAtual >= imagens.length) {
+    imagemAtual = 0;
+  }
+
+  // remover a classe "ativo" de todas as imagens
+  imagens.forEach(imagem => {
+    imagem.classList.remove('ativo');
+  });
+
+  // adicionar a classe "ativo" à imagem atual
+  imagens[imagemAtual].classList.add('ativo');
+};
+
+// função para retroceder para a imagem anterior
+const retrocederImagem = () => {
+  imagemAtual--;
+  if (imagemAtual < 0) {
+    imagemAtual = imagens.length - 1;
+  }
+
+  // remover a classe "ativo" de todas as imagens
+  imagens.forEach(imagem => {
+    imagem.classList.remove('ativo');
+  });
+
+  // adicionar a classe "ativo" à imagem atual
+  imagens[imagemAtual].classList.add('ativo');
+};
+
+// ouvinte de eventos para detectar cliques na tela
+window.addEventListener('click', event => {
+  // verifica se o clique foi na metade esquerda ou direita da tela
+  if (event.clientX < window.innerWidth / 2) {
+    retrocederImagem();
+  } else {
+    avancarImagem();
+  }
+});
+});
+
+    </script>
+  </body>
+</html>
